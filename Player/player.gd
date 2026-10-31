@@ -67,8 +67,7 @@ func take_damage(amount: int):
 	health -= amount
 	update_health_label(health)
 	
-	if health <= 2:
-		health_label.modulate = Color.RED
+	check_health_color()
 	
 	if health <= 0:
 		respawn()
@@ -86,6 +85,15 @@ func play_shoot_effects():
 	muzzle_flash.restart()
 	muzzle_flash.emitting = true
 	
+func eat():
+	health += 1
+	$UpgradeSFX.play()
+	
+func check_health_color():
+	if health <= 2:
+		health_label.modulate = Color.RED
+	else:
+		health_label.modulate = Color.WHITE
 	
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "shoot":
