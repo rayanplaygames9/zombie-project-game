@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var model: MeshInstance3D = $"Zombie Running/Skeleton3D/Model"
 
 @export var move_speed := 5.0
 
@@ -15,7 +16,7 @@ func update_target_position(target_position):
 	nav_agent.target_position = target_position
 
 func _on_navigation_agent_3d_target_reached() -> void:
-	print("in range")
+	pass
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = velocity.move_toward(safe_velocity, .25)

@@ -59,4 +59,13 @@ mesh = SubResource("PlaneMesh_tapir")
 shape = SubResource("BoxShape3D_tapir")
 
 [node name="Zombie" parent="." unique_id=2111605234 instance=ExtResource("4_8j60k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.225058, 0.010998861, 2.1819654)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.7522306, 0.016247952, 1.6799345)
+
+[node name="Zombie2" parent="." unique_id=1533653427 instance=ExtResource("4_8j60k")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.0888491, 0.01624819, 10.740907)
+
+[node name="Zombie3" parent="." unique_id=630135016 instance=ExtResource("4_8j60k")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 12.792185, 0.01624819, 6.438635)
+
+[node name="Zombie4" parent="." unique_id=1958130563 instance=ExtResource("4_8j60k")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 9.720173, 0.01624819, 0.96502686)

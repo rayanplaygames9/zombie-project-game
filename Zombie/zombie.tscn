@@ -623,6 +623,7 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tapir"]
 
 [node name="Zombie" type="CharacterBody3D" unique_id=2111605234 groups=["zombies"]]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("1_n0d0i")
 
 [node name="Zombie Running" type="Node3D" parent="." unique_id=207882091]
@@ -1098,7 +1099,7 @@ bones/66/position = Vector3(-5.221672e-11, 0.10008, 4.7323258e-17)
 bones/66/rotation = Quaternion(0, 0, 0, 1)
 bones/66/scale = Vector3(1, 1, 1)
 
-[node name="WhiteClown" type="MeshInstance3D" parent="Zombie Running/Skeleton3D" unique_id=949815046]
+[node name="Model" type="MeshInstance3D" parent="Zombie Running/Skeleton3D" unique_id=949815046]
 mesh = SubResource("ArrayMesh_h1edo")
 skin = SubResource("Skin_ow4hw")
 skeleton = NodePath("..")

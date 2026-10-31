@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dxurym587m5xf"]
 
 [ext_resource type="Script" uid="uid://cqo5jnjtgqpw7" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="PackedScene" uid="uid://d0jxedpljwpja" path="res://assets/models/Pistol.glb" id="2_4ntmi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tapir"]
 
@@ -19,3 +20,6 @@ shape = SubResource("CapsuleShape3D_k1nkd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7726915, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=753439613]
+
+[node name="Pistol" parent="Head/Camera3D" unique_id=810133112 instance=ExtResource("2_4ntmi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45576894, -0.162207, -0.44375557)
