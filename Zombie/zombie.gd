@@ -18,9 +18,6 @@ func _physics_process(delta: float) -> void:
 func update_target_position(target_position):
 	nav_agent.target_position = target_position
 
-func _on_navigation_agent_3d_target_reached() -> void:
-	pass
-
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = velocity.move_toward(safe_velocity, .25)
 	move_and_slide()
@@ -30,14 +27,12 @@ func _on_hit_detector_body_entered(body: Node3D) -> void:
 		body.take_damage(1)
 		
 func take_damage(amount: int):
+	self_sfx.play()
 	health -= amount
 	update_health_label(health)
 	
 	if health <= 0:
 		queue_free()
-
-func _on_timer_timeout() -> void:
-	self_sfx.play()
 	
 func update_health_label(new_value):
 	health_label.text = "Health: %s" % new_value

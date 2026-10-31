@@ -1132,10 +1132,6 @@ stream = ExtResource("4_4k0ae")
 volume_db = -12.65
 bus = &"SFX"
 
-[node name="Timer" type="Timer" parent="." unique_id=1639780490]
-wait_time = 3.0
-autostart = true
-
 [node name="HealthLabel" type="Label3D" parent="." unique_id=138002192]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8687799, 0)
 billboard = 2
@@ -1144,4 +1140,3 @@ text = "Health: 3"
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
 [connection signal="body_entered" from="HitDetector" to="." method="_on_hit_detector_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

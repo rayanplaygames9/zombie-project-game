@@ -5,18 +5,31 @@ extends CharacterBody3D
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var raycast: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var muzzle_flash: GPUParticles3D = $Head/Camera3D/Pistol/MuzzleFlash
+@onready var touch_buttons: Control = $UI/TouchButtons
 
 @export var move_speed := 10.0
 @export var jump_strength := 13.0
 @export var gravity := -30.0
 @export var mouse_sensitivity := 0.005
-@export var health := 5
+@export var health := 5:
+	set(value):
+		health = clamp(value, 0, 5)
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
+	if OS.has_feature("mobile"):
+		touch_buttons.show()
+	elif OS.has_feature("pc"):
+		touch_buttons.hide()
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		rotate_y(-event.relative.x * mouse_sensitivity)
+		head.rotate_x(-event.relative.y * mouse_sensitivity)
+		head.rotation.x = clamp(head.rotation.x, -PI/2, PI/2)
+		
+	if event is InputEventScreenDrag:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		head.rotate_x(-event.relative.y * mouse_sensitivity)
 		head.rotation.x = clamp(head.rotation.x, -PI/2, PI/2)
@@ -26,14 +39,25 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		
-	if Input.is_action_just_pressed("left_click") \
-			and anim_player.current_animation != "shoot":
-		play_shoot_effects()
-		if raycast.is_colliding():
-			var hit_entity = raycast.get_collider()
-			if hit_entity and hit_entity.is_in_group("zombies"):
-				hit_entity.take_damage(1)
+	
+	if OS.has_feature("pc"):
+		if Input.is_action_just_pressed("left_click") \
+				and anim_player.current_animation != "shoot":
+			play_shoot_effects()
+			if raycast.is_colliding():
+				var hit_entity = raycast.get_collider()
+				if hit_entity and hit_entity.is_in_group("zombies"):
+					hit_entity.take_damage(1)
+					
+	elif OS.has_feature("mobile"):
+		if event.is_action_pressed("shoot_mobile") \
+				and anim_player.current_animation != "shoot":
+			play_shoot_effects()
+			if raycast.is_colliding():
+				var hit_entity = raycast.get_collider()
+				if hit_entity and hit_entity.is_in_group("zombies"):
+					hit_entity.take_damage(1)
+			
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://cqo5jnjtgqpw7" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://d0jxedpljwpja" path="res://assets/models/Pistol.glb" id="2_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://x7dfvdf41huq" path="res://assets/textures/PNG (Transparent)/star_06.png" id="3_btcbx"]
+[ext_resource type="Texture2D" uid="uid://dgw1qdc7kiq8u" path="res://assets/textures/Default/arrow_basic_n.png" id="4_fhl08"]
 [ext_resource type="AudioStream" uid="uid://lahu2wrkbql6" path="res://assets/SFX/pistol-shot.mp3" id="4_gwnis"]
 [ext_resource type="AudioStream" uid="uid://8nuulqgtp07d" path="res://assets/SFX/maximize_007.ogg" id="5_k53q1"]
+[ext_resource type="Texture2D" uid="uid://cjaqgfl31ic72" path="res://assets/textures/Default/slide_vertical_color_section_wide.png" id="5_vtle1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tapir"]
 
@@ -162,7 +164,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45576894, -0.162207, -0.443
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045156717, -0.3215639)
 emitting = false
 amount = 1
-lifetime = 0.5
+lifetime = 0.2
 one_shot = true
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_hk6ki")
@@ -193,6 +195,41 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.2, 0.2)
 theme_override_styles/panel = SubResource("StyleBoxFlat_tapir")
+
+[node name="TouchButtons" type="Control" parent="UI" unique_id=1756326724]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VirtualJoystick" type="VirtualJoystick" parent="UI/TouchButtons" unique_id=1804508097]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 77.0
+offset_top = 490.0
+offset_right = 117.0
+offset_bottom = 530.0
+grow_vertical = 0
+joystick_mode = 1
+action_left = &"left"
+action_right = &"right"
+action_up = &"forward"
+action_down = &"backward"
+
+[node name="BtnJump" type="TouchScreenButton" parent="UI/TouchButtons" unique_id=1857797447]
+position = Vector2(1002.99994, 490.99997)
+scale = Vector2(2.5, 2.5)
+texture_normal = ExtResource("4_fhl08")
+action = "jump"
+
+[node name="BtnShoot" type="TouchScreenButton" parent="UI/TouchButtons" unique_id=1589540645]
+position = Vector2(856.00006, 508.00006)
+rotation = -0.5235988
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5_vtle1")
+action = "shoot_mobile"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=568783290]
 libraries/ = SubResource("AnimationLibrary_fhl08")
