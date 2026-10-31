@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://vpgdv88ol0ey"
 path.s3tc="res://.godot/imported/Zombie Running_0.png-0949549b55ce8711740914392b204d6a.s3tc.ctex"
+path.etc2="res://.godot/imported/Zombie Running_0.png-0949549b55ce8711740914392b204d6a.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/Zombie Running_0.png"
-dest_files=["res://.godot/imported/Zombie Running_0.png-0949549b55ce8711740914392b204d6a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Zombie Running_0.png-0949549b55ce8711740914392b204d6a.s3tc.ctex", "res://.godot/imported/Zombie Running_0.png-0949549b55ce8711740914392b204d6a.etc2.ctex"]
 
 [params]
 
