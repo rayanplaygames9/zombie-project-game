@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://bpvk3by47o0cc"]
 
+[ext_resource type="Script" uid="uid://jc1y2xi6nq51" path="res://Scenes/world.gd" id="1_5a7ea"]
 [ext_resource type="Texture2D" uid="uid://1h0ppob7enlb" path="res://assets/textures/PNG/Green/texture_10.png" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://dxurym587m5xf" path="res://Player/player.tscn" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://cmf6gbqppvxnt" path="res://Zombie/zombie.tscn" id="4_8j60k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -13,6 +16,13 @@ sky_material = SubResource("ProceduralSkyMaterial_go701")
 background_mode = 2
 sky = SubResource("Sky_5a7ea")
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_tapir"]
+vertices = PackedVector3Array(-24.5, 0.0995, -24.5, -24.5, 0.0995, 24.5, 24.5, 0.0995, 24.5, 24.5, 0.0995, -24.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_height = 0.05
+agent_height = 5.0
+agent_max_climb = 0.05
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1nkd"]
 albedo_texture = ExtResource("1_a02cp")
 uv1_triplanar = true
@@ -24,6 +34,7 @@ size = Vector2(50, 50)
 size = Vector3(50, 0.001, 50)
 
 [node name="World" type="Node" unique_id=427293718]
+script = ExtResource("1_5a7ea")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1198729251]
 environment = SubResource("Environment_8j60k")
@@ -32,11 +43,20 @@ environment = SubResource("Environment_8j60k")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Ground" type="StaticBody3D" parent="." unique_id=1470374987]
+[node name="Player" parent="." unique_id=2077854715 instance=ExtResource("2_go701")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.314507, 1.0005001, 0.5778557)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=498184085]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=734203580]
+navigation_mesh = SubResource("NavigationMesh_tapir")
+
+[node name="Ground" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1470374987]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground" unique_id=498184085]
 material_override = SubResource("StandardMaterial3D_k1nkd")
 mesh = SubResource("PlaneMesh_tapir")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=148211797]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground" unique_id=148211797]
 shape = SubResource("BoxShape3D_tapir")
+
+[node name="Zombie" parent="." unique_id=2111605234 instance=ExtResource("4_8j60k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.225058, 0.010998861, 2.1819654)
