@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://vpgdv88ol0ey" path="res://assets/models/Zombie Running_0.png" id="1_4jw8d"]
 [ext_resource type="Script" uid="uid://dk0utfqtwpxsq" path="res://Zombie/zombie.gd" id="1_n0d0i"]
 [ext_resource type="Texture2D" uid="uid://rl0sqdvlfidi" path="res://assets/models/Zombie Running_2.png" id="2_n0d0i"]
+[ext_resource type="AudioStream" uid="uid://cb0re2ttqukyx" path="res://assets/SFX/zombie-growl-halloween-sound-effect.mp3" id="4_4k0ae"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cfiou"]
 resource_name = "WhiteClown_material"
@@ -622,6 +623,9 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tapir"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_tapir"]
+radius = 1.0
+
 [node name="Zombie" type="CharacterBody3D" unique_id=2111605234 groups=["zombies"]]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("1_n0d0i")
@@ -1117,5 +1121,27 @@ target_desired_distance = 2.0
 path_height_offset = 0.1
 avoidance_enabled = true
 
+[node name="HitDetector" type="Area3D" parent="." unique_id=372827605]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetector" unique_id=1921381570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9333676, 0)
+shape = SubResource("SphereShape3D_tapir")
+
+[node name="SelfSFX" type="AudioStreamPlayer" parent="." unique_id=250447523]
+stream = ExtResource("4_4k0ae")
+volume_db = -12.65
+bus = &"SFX"
+
+[node name="Timer" type="Timer" parent="." unique_id=1639780490]
+wait_time = 3.0
+autostart = true
+
+[node name="HealthLabel" type="Label3D" parent="." unique_id=138002192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8687799, 0)
+billboard = 2
+text = "Health: 3"
+
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+[connection signal="body_entered" from="HitDetector" to="." method="_on_hit_detector_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

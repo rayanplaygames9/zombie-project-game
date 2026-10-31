@@ -2,12 +2,145 @@
 
 [ext_resource type="Script" uid="uid://cqo5jnjtgqpw7" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://d0jxedpljwpja" path="res://assets/models/Pistol.glb" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://x7dfvdf41huq" path="res://assets/textures/PNG (Transparent)/star_06.png" id="3_btcbx"]
+[ext_resource type="AudioStream" uid="uid://lahu2wrkbql6" path="res://assets/SFX/pistol-shot.mp3" id="4_gwnis"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tapir"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k1nkd"]
 
-[node name="Player" type="CharacterBody3D" unique_id=2077854715]
+[sub_resource type="Gradient" id="Gradient_gwnis"]
+offsets = PackedFloat32Array(0.005882353, 0.22941177, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p41vm"]
+gradient = SubResource("Gradient_gwnis")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hk6ki"]
+angle_min = 45.00001
+angle_max = 45.00001
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_p41vm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1nkd"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.5004009, 0.499848, 0, 1)
+albedo_texture = ExtResource("3_btcbx")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tapir"]
+material = SubResource("StandardMaterial3D_k1nkd")
+size = Vector2(0.5, 0.5)
+orientation = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tapir"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Animation" id="Animation_4ntmi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/Pistol:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.45576894, -0.162207, -0.44375557)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/Pistol:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_btcbx"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/Pistol:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8666667, 1.8333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.45576894, -0.162207, -0.44375557), Vector3(0.45576894, -0.23734355, -0.44375557), Vector3(0.45576894, -0.1833924, -0.44375557)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/Pistol:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8666667, 1.8333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.25979522, 0, 0), Vector3(0.044037823, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gwnis"]
+resource_name = "shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/Pistol:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.32860622, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k53q1"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/Pistol:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.34, 0.63, 0.96666664),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5),
+"update": 0,
+"values": [Vector3(0.45576894, -0.162207, -0.44375557), Vector3(0.5855516, -0.25100577, -0.44375557), Vector3(0.26127303, -0.25100577, -0.44375557), Vector3(0.45576894, -0.162207, -0.44375557)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhl08"]
+_data = {
+&"RESET": SubResource("Animation_4ntmi"),
+&"idle": SubResource("Animation_btcbx"),
+&"shoot": SubResource("Animation_gwnis"),
+&"walk": SubResource("Animation_k53q1")
+}
+
+[node name="Player" type="CharacterBody3D" unique_id=2077854715 groups=["players"]]
 script = ExtResource("1_l8h54")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1202977897]
@@ -23,3 +156,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7726915, 0)
 
 [node name="Pistol" parent="Head/Camera3D" unique_id=810133112 instance=ExtResource("2_4ntmi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45576894, -0.162207, -0.44375557)
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="Head/Camera3D/Pistol" unique_id=198562220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045156717, -0.3215639)
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_hk6ki")
+draw_pass_1 = SubResource("PlaneMesh_tapir")
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=875000450]
+target_position = Vector3(0, 0, -50)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=948208296]
+
+[node name="HealthLabel" type="Label" parent="UI" unique_id=500199189]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "Health: 5"
+
+[node name="Reticle" type="Panel" parent="UI" unique_id=329762026]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+theme_override_styles/panel = SubResource("StyleBoxFlat_tapir")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=568783290]
+libraries/ = SubResource("AnimationLibrary_fhl08")
+playback_default_blend_time = 0.1
+
+[node name="ShootSFX" type="AudioStreamPlayer" parent="." unique_id=149501841]
+stream = ExtResource("4_gwnis")
+bus = &"SFX"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

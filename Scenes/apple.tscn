@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://brj8us0q522e7"]
+
+[ext_resource type="Script" uid="uid://cgb62sbox5363" path="res://Scenes/apple.gd" id="1_v3gsn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tapir"]
+albedo_color = Color(0.7256727, 0, 0.034853403, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tapir"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k1nkd"]
+radius = 0.34672058
+
+[node name="Apple" type="Area3D" unique_id=258267411]
+script = ExtResource("1_v3gsn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=13566188]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_tapir")
+mesh = SubResource("SphereMesh_tapir")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1383792202]
+shape = SubResource("SphereShape3D_k1nkd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
