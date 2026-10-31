@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bpvk3by47o0cc"]
+
+[ext_resource type="Texture2D" uid="uid://1h0ppob7enlb" path="res://assets/textures/PNG/Green/texture_10.png" id="1_a02cp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_go701"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_5a7ea"]
+sky_material = SubResource("ProceduralSkyMaterial_go701")
+
+[sub_resource type="Environment" id="Environment_8j60k"]
+background_mode = 2
+sky = SubResource("Sky_5a7ea")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1nkd"]
+albedo_texture = ExtResource("1_a02cp")
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tapir"]
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tapir"]
+size = Vector3(50, 0.001, 50)
+
+[node name="World" type="Node" unique_id=427293718]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1198729251]
+environment = SubResource("Environment_8j60k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=685011621]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1470374987]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=498184085]
+material_override = SubResource("StandardMaterial3D_k1nkd")
+mesh = SubResource("PlaneMesh_tapir")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=148211797]
+shape = SubResource("BoxShape3D_tapir")
